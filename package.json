@@ -14,6 +14,10 @@
     "url": "https://tymczenko.tk"
   },
   "license": "ISC",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/AntonTymczenko/webpack-boilerplate.git"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
