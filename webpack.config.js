@@ -2,10 +2,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
+const glob = require('glob')
+const PurifyCSSPlugin = require('purifycss-webpack')
+
 const src = __dirname + '/src'
 const dist = __dirname + '/dist'
 const public = __dirname +'/public'
 
+// PRODUCTION / DEVELOPMENT   mode:  --------------------------------------
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
 const prod = process.env.NODE_ENV === 'production' ? true : false
 
@@ -22,12 +26,17 @@ const plugins = [
     disable: !prod,
     allChunks: true
   }),
-  new CleanWebpackPlugin(['dist'])
+  new CleanWebpackPlugin(['dist']),
+  new PurifyCSSPlugin({
+    paths: glob.sync(src + '/*.ejs'),
+    minimize: true
+  })
 ]
 if (!prod) {
   plugins.push( new webpack.HotModuleReplacementPlugin() )
 }
 
+// EXPORTS: ---------------------------------------------------------------
 module.exports = {
   context: src,
   entry: ['./index.js'],
