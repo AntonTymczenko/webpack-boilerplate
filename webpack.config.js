@@ -9,20 +9,17 @@ const src = __dirname + '/src'
 const dist = __dirname + '/dist'
 const public = __dirname +'/public'
 
-// CONTENT ----------------------------------------------------------------
-
-let data = require('./src/js/content.js')
-
 // PRODUCTION / DEVELOPMENT   mode:  --------------------------------------
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
 const prod = process.env.NODE_ENV === 'production' ? true : false
 
-// HtmlWebpackPlugin configuration:
-data.minify =  { collapseWhitespace: prod },
-data.template = './index.ejs'
-
 const plugins = [
-  new HtmlWebpackPlugin( data ),
+  new HtmlWebpackPlugin({
+    minify: {
+      collapseWhitespace: prod,
+      removeComments: prod },
+    template: 'index.ejs'
+  }),
   new ExtractTextPlugin({
     filename: 'bundle.css',
     disable: !prod,
