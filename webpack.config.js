@@ -18,6 +18,7 @@ const plugins = [
     minify: {
       collapseWhitespace: prod,
       removeComments: prod },
+    // template: 'ejs-loader!./src/index.ejs'
     template: 'index.ejs'
   }),
   new ExtractTextPlugin({
@@ -45,6 +46,10 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.ejs$/,
+      //   use: ['ejs-loader']
+      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,
